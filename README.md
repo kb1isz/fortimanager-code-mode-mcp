@@ -201,19 +201,19 @@ specIndex
 
 ```javascript
 // List all ADOMs
-const resp = await fortimanager.request('get', [{ url: '/dvmdb/adom' }]);
+var resp = fortimanager.request('get', [{ url: '/dvmdb/adom' }]);
 resp.result[0].data;
 ```
 
 ```javascript
 // Get system status
-const resp = await fortimanager.request('get', [{ url: '/sys/status' }]);
+var resp = fortimanager.request('get', [{ url: '/sys/status' }]);
 resp.result[0].data;
 ```
 
 ```javascript
 // Create a firewall address object
-const resp = await fortimanager.request('add', [
+var resp = fortimanager.request('add', [
   {
     url: '/pm/config/adom/root/obj/firewall/address',
     data: {
@@ -227,7 +227,7 @@ resp.result[0].status;
 
 ```javascript
 // Device proxy — get interfaces from a managed FortiGate
-const resp = await fortimanager.request('exec', [
+var resp = fortimanager.request('exec', [
   {
     url: '/sys/proxy/json',
     data: {

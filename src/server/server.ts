@@ -73,7 +73,7 @@ specIndex.filter(o => o.urls.some(u => u.includes('/dvmdb/'))).map(o => ({ name:
 
 const EXECUTE_TOOL_DESCRIPTION = `Execute FortiManager JSON-RPC API calls via sandboxed JavaScript.
 
-Write JavaScript code that calls the FortiManager API. The code runs in an async sandbox with access to the \`fortimanager\` proxy object.
+Write JavaScript code that calls the FortiManager API. The code runs in a sandboxed environment with access to the \`fortimanager\` proxy object. All API calls appear synchronous — no \`await\` needed.
 
 ## Available Globals
 
@@ -99,19 +99,19 @@ Write JavaScript code that calls the FortiManager API. The code runs in an async
 
 \`\`\`javascript
 // List all ADOMs
-const resp = await fortimanager.request('get', [{ url: '/dvmdb/adom' }]);
+var resp = fortimanager.request('get', [{ url: '/dvmdb/adom' }]);
 resp.result[0].data
 \`\`\`
 
 \`\`\`javascript
 // Get system status
-const resp = await fortimanager.request('get', [{ url: '/sys/status' }]);
+var resp = fortimanager.request('get', [{ url: '/sys/status' }]);
 resp.result[0].data
 \`\`\`
 
 \`\`\`javascript
 // List devices in an ADOM
-const resp = await fortimanager.request('get', [{
+var resp = fortimanager.request('get', [{
   url: '/dvmdb/adom/root/device',
   fields: ['name', 'ip', 'sn', 'conn_status']
 }]);
@@ -120,7 +120,7 @@ resp.result[0].data
 
 \`\`\`javascript
 // Create a firewall address
-const resp = await fortimanager.request('add', [{
+var resp = fortimanager.request('add', [{
   url: '/pm/config/adom/root/obj/firewall/address',
   data: { name: 'test-server', subnet: ['10.0.1.100', '255.255.255.255'] }
 }]);
@@ -129,7 +129,7 @@ resp.result[0].status
 
 \`\`\`javascript
 // Device proxy call — get interfaces from managed FortiGate
-const resp = await fortimanager.request('exec', [{
+var resp = fortimanager.request('exec', [{
   url: '/sys/proxy/json',
   data: {
     target: ['/adom/root/device/my-fortigate'],
@@ -228,7 +228,7 @@ export function createMcpServer(options: CreateServerOptions): McpServer {
         code: z
           .string()
           .describe(
-            'JavaScript code to execute against the live FortiManager API. Supports async/await.',
+            'JavaScript code to execute against the live FortiManager API. Calls are synchronous — no await needed.',
           ),
       },
     },
