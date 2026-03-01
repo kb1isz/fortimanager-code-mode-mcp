@@ -1,0 +1,33 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- **MCP Server** with 2 tools (`search` + `execute`) using the Code Mode pattern
+- **FortiManager JSON-RPC client** with token-based authentication and SSL bypass support
+- **QuickJS WASM sandbox** for secure agent code execution (memory/CPU limited)
+- **API spec generator** parsing FortiManager HTML docs into structured JSON
+- **Dual API version support** — FortiManager 7.4.9 (72 modules, 17,426 objects) and 7.6.5 (82 modules, 22,060 objects)
+- **Dual transport** — Stdio (local dev / Claude Desktop) and Streamable HTTP (Docker / production)
+- **Docker** multi-stage Alpine build with health checks and non-root user
+- **Docker Compose** configuration with env_file support
+- **CI/CD pipelines** — GitHub Actions for lint, typecheck, test, build, Docker push, and releases
+- **66 unit tests** across 5 suites (client, search executor, code executor, server, config)
+- **21 integration tests** validated against a live FortiManager v7.6.6 VM
+- **Performance tuning** — pre-computed JSON caches, WASM pre-warming, API call limits (50/execution), response truncation (100 KB)
+- **Security hardening** — sandboxed execution, no `eval` in host, fresh contexts, input validation with Zod
+- Community files: CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md, issue/PR templates
+- Git LFS tracking for large API spec JSON files
+
+## [0.1.0] — 2026-03-01
+
+Initial alpha release.
+
+[Unreleased]: https://github.com/jmpijll/fortimanager-code-mode-mcp/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/jmpijll/fortimanager-code-mode-mcp/releases/tag/v0.1.0

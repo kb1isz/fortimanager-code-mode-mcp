@@ -1,0 +1,61 @@
+{
+  "name": "fortimanager-code-mode-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for FortiManager using Code Mode pattern — 2 tools (search + execute) with QuickJS WASM sandbox",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src/ scripts/ --ext .ts",
+    "lint:fix": "eslint src/ scripts/ --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\"",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "generate:spec": "tsx scripts/generate-spec.ts"
+  },
+  "keywords": [
+    "fortimanager",
+    "fortinet",
+    "mcp",
+    "model-context-protocol",
+    "code-mode",
+    "json-rpc"
+  ],
+  "author": "Jamie van der Pijll <jamiehakker@hotmail.com> (https://github.com/jmpijll)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmpijll/fortimanager-code-mode-mcp.git"
+  },
+  "homepage": "https://github.com/jmpijll/fortimanager-code-mode-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/jmpijll/fortimanager-code-mode-mcp/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "dotenv": "^17.3.1",
+    "eslint": "^8.57.0",
+    "prettier": "^3.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "cheerio": "^1.0.0",
+    "quickjs-emscripten": "^0.31.0",
+    "undici": "^7.22.0",
+    "zod": "^3.23.0"
+  }
+}

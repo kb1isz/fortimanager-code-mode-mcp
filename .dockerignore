@@ -1,0 +1,36 @@
+# Dependencies (reinstalled in Docker)
+node_modules/
+
+# Source docs (specs already generated)
+docs/
+
+# Build output (rebuilt in Docker)
+dist/
+
+# Git
+.git/
+.gitignore
+
+# Environment (injected at runtime)
+.env
+.env.local
+.env.example
+
+# Memory bank (agent-local)
+.memory/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Coverage / logs
+coverage/
+*.log
+npm-debug.log*
+
+# Docker files (no recursion)
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
