@@ -28,7 +28,7 @@ The Code Mode pattern was pioneered by [Cloudflare's MCP server](https://github.
 - **QuickJS WASM sandbox** — Memory/CPU-limited code execution with no host access
 - **Dual transport** — Stdio (for Claude Desktop / local dev) and Streamable HTTP (for Docker / production)
 - **Docker-ready** — Multi-stage Alpine build with health checks
-- **Tested against live FortiManager** — 87 tests (66 unit + 21 integration) passing against FMG v7.6.6
+- **Tested against live FortiManager** — 152 tests (66 unit + 86 integration) passing against FMG v7.6.6
 
 ## Quick Start
 
