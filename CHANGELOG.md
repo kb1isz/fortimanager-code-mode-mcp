@@ -7,26 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes._
+
+## [1.0.0] — 2026-03-02
+
+### Added
+
+- **Binary entry point** — `fortimanager-mcp` CLI command via `bin` field in package.json (source installs only)
+
 ### Changed
 
+- **Stable release** — promoted from Beta to v1.0.0 public release
 - **API spec files removed from repository** — spec files are now generated locally from Fortinet's HTML docs (not redistributable). Users must download the FortiManager JSON API Reference from [FNDN](https://fndn.fortinet.net) and run `npm run generate:spec` before first use.
 - **Git LFS removed** — no longer needed since spec files are git-ignored
 - **Clear startup error** — server now shows detailed instructions when spec files are missing
 - Documentation updated with spec generation prerequisites across README, usage-guide, and CONTRIBUTING
 - Dockerfile updated to require locally-generated spec files before building
 - CI workflows no longer require Git LFS checkout
-
-## [1.0.0] — 2026-03-02
-
-### Added
-
-- **npm package** — installable via `npm install -g fortimanager-code-mode-mcp` or `npx fortimanager-code-mode-mcp`
-- **Binary entry point** — `fortimanager-mcp` CLI command via `bin` field in package.json
-
-### Changed
-
-- **Stable release** — promoted from Beta to v1.0.0 public release
-- README updated with npm/npx installation instructions and `npx` examples for VS Code Copilot and Claude Desktop
 - Repository visibility changed to public
 
 ## [0.2.0] — 2026-03-02

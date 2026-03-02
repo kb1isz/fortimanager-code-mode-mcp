@@ -10,6 +10,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as cheerio from 'cheerio';
+import type { Element } from 'domhandler';
 import type {
   FmgApiSpec,
   FmgAttributeDef,
@@ -357,10 +358,7 @@ function parseObjectsHtml($: cheerio.CheerioAPI): FmgObjectDef[] {
 
 // ─── URL Table Parsing ──────────────────────────────────────────────
 
-function parseUrlTable(
-  $: cheerio.CheerioAPI,
-  $div: cheerio.Cheerio<cheerio.Element>,
-): FmgObjectUrl[] {
+function parseUrlTable($: cheerio.CheerioAPI, $div: cheerio.Cheerio<Element>): FmgObjectUrl[] {
   const urls: FmgObjectUrl[] = [];
 
   // URL table is the <table> without .param_table class
@@ -396,10 +394,7 @@ function parseUrlTable(
 
 // ─── Parameter/Attribute Table Parsing ──────────────────────────────
 
-function parseParamTable(
-  $: cheerio.CheerioAPI,
-  $table: cheerio.Cheerio<cheerio.Element>,
-): FmgParamDef[] {
+function parseParamTable($: cheerio.CheerioAPI, $table: cheerio.Cheerio<Element>): FmgParamDef[] {
   const params: FmgParamDef[] = [];
 
   $table.find('> tbody > tr, > tr').each((_i, trEl) => {
@@ -423,7 +418,7 @@ function parseParamTable(
 
 function parseAttributeDesc(
   $: cheerio.CheerioAPI,
-  $td: cheerio.Cheerio<cheerio.Element>,
+  $td: cheerio.Cheerio<Element>,
   name: string,
 ): FmgAttributeDef {
   const html = $td.html() ?? '';

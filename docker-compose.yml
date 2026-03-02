@@ -1,5 +1,5 @@
 services:
-  fortimanager-mcp:
+  fmg-mcp:
     build:
       context: .
       dockerfile: Dockerfile

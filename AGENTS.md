@@ -99,8 +99,8 @@ src/
 scripts/
 ├── generate-spec.ts    # HTML docs → JSON spec generator
 ├── e2e-test.ts         # End-to-end test suite (live FMG)
-├── generate-spec-74.ts # Spec generator for 7.4 docs
-└── generate-spec-76.ts # Spec generator for 7.6 docs
+├── live-test.ts        # Integration test suite (live FMG)
+└── spec-coverage.ts    # API spec coverage report
 ```
 
 ### Naming Conventions

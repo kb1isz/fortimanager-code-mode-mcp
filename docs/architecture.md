@@ -131,7 +131,7 @@ Pre-generated JSON files containing the complete FortiManager API specification:
 - `fmg-api-spec-7.4.json` — 72 modules, 17,426 objects, 98 MB
 - `fmg-api-spec-7.6.json` — 82 modules, 22,060 objects, 127 MB
 
-Generated offline by `scripts/generate-spec.ts` from FortiManager HTML documentation (cheerio parsing). Stored in Git LFS.
+Generated offline by `scripts/generate-spec.ts` from FortiManager HTML documentation (cheerio parsing). Generated locally and git-ignored — not included in the repository (see [README](../README.md#important-api-spec-required) for setup).
 
 Spec structure:
 ```

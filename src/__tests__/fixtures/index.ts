@@ -20,34 +20,31 @@ export const SAMPLE_SPEC: FmgApiSpec = {
       name: 'sys',
       title: 'System',
       methods: [
-        { id: 'get', description: 'Retrieve objects' },
-        { id: 'exec', description: 'Execute commands' },
+        { id: 'get', name: 'get', description: 'Retrieve objects', params: [] },
+        { id: 'exec', name: 'exec', description: 'Execute commands', params: [] },
       ],
       objects: [
         {
           name: 'sys/status',
           type: 'object',
           description: 'System status information including version and hostname.',
-          urls: [{ path: '/sys/status', methods: ['get'] }],
+          urls: [{ category: 'Object', path: '/sys/status' }],
           methods: ['get'],
           attributes: [
             {
               name: 'Version',
               type: 'string',
               description: 'FortiManager version',
-              required: false,
             },
             {
               name: 'Hostname',
               type: 'string',
               description: 'FortiManager hostname',
-              required: false,
             },
             {
               name: 'Serial Number',
               type: 'string',
               description: 'Unit serial number',
-              required: false,
             },
           ],
         },
@@ -57,11 +54,11 @@ export const SAMPLE_SPEC: FmgApiSpec = {
       name: 'firewall',
       title: 'Firewall Objects',
       methods: [
-        { id: 'get', description: 'Retrieve objects' },
-        { id: 'add', description: 'Create objects' },
-        { id: 'set', description: 'Replace objects' },
-        { id: 'update', description: 'Partially update objects' },
-        { id: 'delete', description: 'Delete objects' },
+        { id: 'get', name: 'get', description: 'Retrieve objects', params: [] },
+        { id: 'add', name: 'add', description: 'Create objects', params: [] },
+        { id: 'set', name: 'set', description: 'Replace objects', params: [] },
+        { id: 'update', name: 'update', description: 'Partially update objects', params: [] },
+        { id: 'delete', name: 'delete', description: 'Delete objects', params: [] },
       ],
       objects: [
         {
@@ -70,25 +67,24 @@ export const SAMPLE_SPEC: FmgApiSpec = {
           description: 'IPv4 address objects used in firewall policies.',
           urls: [
             {
+              category: 'Table',
               path: '/pm/config/adom/{adom}/obj/firewall/address',
-              methods: ['get', 'add', 'set', 'update', 'delete'],
             },
             {
+              category: 'Table',
               path: '/pm/config/global/obj/firewall/address',
-              methods: ['get', 'add', 'set', 'update', 'delete'],
             },
           ],
           methods: ['get', 'add', 'set', 'update', 'delete'],
           attributes: [
-            { name: 'name', type: 'string', description: 'Address name', required: true },
-            { name: 'subnet', type: 'array', description: 'IP/Netmask pair', required: false },
-            { name: 'type', type: 'integer', description: 'Address type', required: false },
-            { name: 'comment', type: 'string', description: 'Comment', required: false },
+            { name: 'name', type: 'string', description: 'Address name' },
+            { name: 'subnet', type: 'array', description: 'IP/Netmask pair' },
+            { name: 'type', type: 'integer', description: 'Address type' },
+            { name: 'comment', type: 'string', description: 'Comment' },
             {
               name: 'associated-interface',
               type: 'string',
               description: 'Associated interface',
-              required: false,
             },
           ],
         },
@@ -98,15 +94,15 @@ export const SAMPLE_SPEC: FmgApiSpec = {
           description: 'Firewall address groups.',
           urls: [
             {
+              category: 'Table',
               path: '/pm/config/adom/{adom}/obj/firewall/addrgrp',
-              methods: ['get', 'add', 'set', 'update', 'delete'],
             },
           ],
           methods: ['get', 'add', 'set', 'update', 'delete'],
           attributes: [
-            { name: 'name', type: 'string', description: 'Group name', required: true },
-            { name: 'member', type: 'array', description: 'Member addresses', required: true },
-            { name: 'comment', type: 'string', description: 'Comment', required: false },
+            { name: 'name', type: 'string', description: 'Group name' },
+            { name: 'member', type: 'array', description: 'Member addresses' },
+            { name: 'comment', type: 'string', description: 'Comment' },
           ],
         },
       ],

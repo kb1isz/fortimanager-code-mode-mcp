@@ -198,7 +198,7 @@ describe('CodeExecutor', () => {
     it('enforces maximum API call count per execution', async () => {
       const client = createMockClient();
       vi.mocked(client.rawRequest).mockResolvedValue(
-        makeSuccessResponse('/sys/status', { ok: true }),
+        makeSuccessResponse(1, '/sys/status', { ok: true }),
       );
       const executor = new CodeExecutor(client, {
         timeoutMs: 30_000,

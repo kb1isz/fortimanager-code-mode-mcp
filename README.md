@@ -361,7 +361,7 @@ src/
 ├── server/           # MCP server and transport
 │   ├── server.ts     # McpServer with search + execute tools
 │   └── transport.ts  # Stdio + Streamable HTTP transports
-├── spec/             # Pre-generated API spec JSON files (Git LFS)
+├── spec/             # Generated API spec JSON files (git-ignored, generated locally)
 │   ├── fmg-api-spec-7.4.json  # 72 modules, 17,426 objects, 38,586 URLs
 │   └── fmg-api-spec-7.6.json  # 82 modules, 22,060 objects, 49,285 URLs
 ├── types/            # Shared type definitions
@@ -371,6 +371,7 @@ src/
 └── index.ts          # Entry point
 scripts/
 ├── generate-spec.ts  # HTML docs → JSON spec generator
+├── e2e-test.ts       # End-to-end scenario tests (live FMG)
 ├── live-test.ts      # Integration test suite (86 tests against live FMG)
 └── spec-coverage.ts  # API spec coverage report & live URL validation
 ```
@@ -409,7 +410,7 @@ This project was co-developed by [Jamie van der Pijll](https://github.com/jmpijl
 Inspired by:
 
 - **[Cloudflare MCP Server](https://github.com/cloudflare/mcp-server-cloudflare)** — Pioneered the Code Mode pattern for MCP servers (2 tools instead of hundreds)
-- **[fortimanager-mcp](https://github.com/jmpijll/fortimanager-mcp)** — Our earlier traditional MCP server for FortiManager (one tool per endpoint), which demonstrated the need for a more token-efficient approach
+- **[fortimanager-mcp](https://github.com/jmpijll/fortimanager-mcp)** — Our earlier traditional MCP server for FortiManager (one tool per endpoint, now archived), which demonstrated the need for a more token-efficient approach
 
 ## License
 
