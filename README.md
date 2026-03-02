@@ -58,7 +58,7 @@ docker compose up -d
 
 # Verify
 curl http://localhost:8000/health
-# → {"status":"ok","version":"0.1.0"}
+# → {"status":"ok","version":"0.2.0"}
 ```
 
 ### VS Code Copilot (Recommended)

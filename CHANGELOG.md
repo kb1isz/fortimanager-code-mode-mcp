@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-03-03
+
+### Added
+
+- **VS Code Copilot integration** — `.vscode/mcp.json.example` template and setup docs
+- **HTTP transport rate limiting** — sliding-window limiter (60 req/min per client IP) with X-Forwarded-For support
+- **Request logging and audit trail** — tool call logging with code size, duration, and result status
+- **Enhanced `/health` endpoint** — now returns uptime and request stats (total, MCP, rate-limited, errors)
+- **10 end-to-end scenario tests** (`scripts/e2e-test.ts`) covering real agent workflows against live FortiManager
+- **Architecture deep-dive** (`docs/architecture.md`) — component details, data flow, security model
+- **Usage guide** (`docs/usage-guide.md`) — search/execute workflows, error handling, best practices
+- **Troubleshooting guide** (`docs/troubleshooting.md`) — common issues, error codes, permission matrix
+
+### Fixed
+
+- **Build script** now copies spec JSON files to `dist/spec/` (was failing with ENOENT)
+- **Sandbox `await` issue** — removed `await` from execute tool examples; `fortimanager.request()` is synchronous in QuickJS sandbox
+- **Tool descriptions** refined with accurate method names (`get-obj`/`get-table`), module filtering examples, and `function()` syntax
+
+### Changed
+
+- Tool description for `search` — documents `module` field, method names, and module filtering
+- Tool description for `execute` — documents `status.code` semantics and error handling patterns
+- README status upgraded from Alpha to Beta
+- Expanded Security documentation with 15 hardening measures
+
 ## [0.1.0] — 2026-03-02
 
 ### Added
@@ -41,5 +67,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Graceful shutdown** for both stdio and HTTP transports with signal deduplication
 - **Startup health check** validates FortiManager connectivity at boot
 
-[Unreleased]: https://github.com/jmpijll/fortimanager-code-mode-mcp/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/jmpijll/fortimanager-code-mode-mcp/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/jmpijll/fortimanager-code-mode-mcp/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jmpijll/fortimanager-code-mode-mcp/releases/tag/v0.1.0

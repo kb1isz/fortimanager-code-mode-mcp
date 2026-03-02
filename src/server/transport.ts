@@ -162,7 +162,7 @@ export async function startHttpTransport(
           res.end(
             JSON.stringify({
               status: 'ok',
-              version: '0.1.0',
+              version: '0.2.0',
               uptime: Math.floor((Date.now() - new Date(stats.startedAt).getTime()) / 1000),
               stats: {
                 totalRequests: stats.totalRequests,
