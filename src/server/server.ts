@@ -19,19 +19,22 @@ import type { ExecuteResult } from '../executor/types.js';
 const SEARCH_TOOL_DESCRIPTION = `Search the FortiManager JSON-RPC API specification.
 
 Write JavaScript code that queries the API spec to find URLs, objects, attributes, methods, and error codes.
+Use \`var\` (not \`const\`) for variable declarations.
 
 ## Available Globals
 
 - \`specIndex\` — Array of all API objects (lightweight). Each entry:
   \`{ name, type, module, description, urls: string[], methods: string[], attributeNames: string[] }\`
+  - \`methods\` values are like \`"get-obj"\`, \`"get-table"\`, \`"add"\`, \`"set"\`, \`"exec"\`, etc.
+  - \`module\` is the spec module name (e.g., \`"sys"\`, \`"dvmdb"\`, \`"cli"\`, \`"pkg76-3645"\`)
 
-- \`getObject(nameOrUrl)\` — Get full object details by name (e.g., "firewall/address") or URL path (e.g., "/pm/config/adom/{adom}/obj/firewall/address"). Returns the complete object with all attributes, or null.
+- \`getObject(nameOrUrl)\` — Get full object details by name (e.g., \`"firewall/address"\`) or URL path. Returns the complete object with all attributes, or null.
 
 - \`moduleList\` — Array of all modules: \`{ name, title, objectCount, methodCount }\`
 
 - \`errorCodes\` — Array of all error codes: \`{ code, message }\`
 
-- \`specVersion\` — API spec version string (e.g., "7.6")
+- \`specVersion\` — API spec version string (e.g., \`"7.6"\`)
 
 - \`console.log()\` — Captured in output logs
 
@@ -43,7 +46,7 @@ Your code's final expression is the result. Use it to return the data you found.
 
 \`\`\`javascript
 // Find all firewall-related objects
-specIndex.filter(o => o.name.includes('firewall')).map(o => ({ name: o.name, urls: o.urls, type: o.type }))
+specIndex.filter(function(o) { return o.name.includes('firewall'); }).map(function(o) { return { name: o.name, urls: o.urls, type: o.type }; })
 \`\`\`
 
 \`\`\`javascript
@@ -53,27 +56,23 @@ getObject('firewall/address')
 
 \`\`\`javascript
 // Search for objects by attribute name
-specIndex.filter(o => o.attributeNames.includes('srcaddr')).map(o => o.name)
+specIndex.filter(function(o) { return o.attributeNames.includes('srcaddr'); }).map(function(o) { return o.name; })
 \`\`\`
 
 \`\`\`javascript
-// List all modules
-moduleList
-\`\`\`
-
-\`\`\`javascript
-// Find objects that support 'add' method
-specIndex.filter(o => o.methods.includes('add')).map(o => ({ name: o.name, urls: o.urls }))
+// Find all objects in the dvmdb module
+specIndex.filter(function(o) { return o.module === 'dvmdb'; }).map(function(o) { return { name: o.name, urls: o.urls }; })
 \`\`\`
 
 \`\`\`javascript
 // Search by URL pattern
-specIndex.filter(o => o.urls.some(u => u.includes('/dvmdb/'))).map(o => ({ name: o.name, urls: o.urls }))
+specIndex.filter(function(o) { return o.urls.some(function(u) { return u.includes('/dvmdb/'); }); }).map(function(o) { return { name: o.name, urls: o.urls }; })
 \`\`\``;
 
 const EXECUTE_TOOL_DESCRIPTION = `Execute FortiManager JSON-RPC API calls via sandboxed JavaScript.
 
 Write JavaScript code that calls the FortiManager API. The code runs in a sandboxed environment with access to the \`fortimanager\` proxy object. All API calls appear synchronous — no \`await\` needed.
+Use \`var\` (not \`const\`) for variable declarations.
 
 ## Available Globals
 
@@ -81,12 +80,13 @@ Write JavaScript code that calls the FortiManager API. The code runs in a sandbo
   - \`method\`: \`"get" | "set" | "add" | "update" | "delete" | "exec" | "clone" | "move"\`
   - \`params\`: Array of parameter objects, each with at least \`url\` field
   - Returns: \`{ id, result: [{ status: { code, message }, url, data? }] }\`
+  - \`status.code\`: \`0\` = success, non-zero = error (e.g., \`-6\` = invalid URL, \`-11\` = no permission)
 
 - \`console.log()\` — Captured in output logs
 
 ## Parameter Object Fields
 
-- \`url\` (required) — API URL path (e.g., "/dvmdb/adom")
+- \`url\` (required) — API URL path (e.g., \`"/dvmdb/adom"\`)
 - \`data\` — Request payload for add/set/update/exec
 - \`filter\` — Filter expression: \`["field", "operator", "value"]\`
 - \`fields\` — Array of field names to return
@@ -128,16 +128,14 @@ resp.result[0].status
 \`\`\`
 
 \`\`\`javascript
-// Device proxy call — get interfaces from managed FortiGate
-var resp = fortimanager.request('exec', [{
-  url: '/sys/proxy/json',
-  data: {
-    target: ['/adom/root/device/my-fortigate'],
-    action: 'get',
-    resource: '/api/v2/monitor/system/interface'
-  }
-}]);
-resp.result[0].data
+// Check result and handle errors
+var resp = fortimanager.request('get', [{ url: '/dvmdb/device' }]);
+var status = resp.result[0].status;
+if (status.code !== 0) {
+  console.log('Error: ' + status.message);
+} else {
+  resp.result[0].data;
+}
 \`\`\``;
 
 // ─── Server Factory ─────────────────────────────────────────────────
