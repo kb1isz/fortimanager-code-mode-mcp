@@ -51,7 +51,11 @@ function main(): void {
   const apiReferenceDir = path.resolve(rootDir, 'docs/api-reference');
 
   for (const specConfig of SPECS) {
-    const htmlDir = findLatestHtmlDir(apiReferenceDir, specConfig.version, specConfig.htmlDirPattern);
+    const htmlDir = findLatestHtmlDir(
+      apiReferenceDir,
+      specConfig.version,
+      specConfig.htmlDirPattern,
+    );
     const outputPath = path.resolve(rootDir, specConfig.outputPath);
 
     if (!htmlDir) {
@@ -114,7 +118,10 @@ function findLatestHtmlDir(
     .filter((entry) => entry.isDirectory())
     .map((entry) => ({ name: entry.name, match: entry.name.match(htmlDirPattern) }))
     .filter((entry): entry is { name: string; match: RegExpMatchArray } => entry.match !== null)
-    .map(({ name, match }) => ({ name, patchVersion: Number.parseInt(match[1]!.split('.')[2]!, 10) }))
+    .map(({ name, match }) => ({
+      name,
+      patchVersion: Number.parseInt(match[1]!.split('.')[2]!, 10),
+    }))
     .filter(({ patchVersion }) => Number.isFinite(patchVersion))
     .sort((a, b) => b.patchVersion - a.patchVersion);
 
